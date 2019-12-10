@@ -11,10 +11,13 @@ import android.view.View;
 import android.widget.Button;
 
 
+
 import java.util.ArrayList;
-import java.util.Arrays;
+
+import java.util.Collections;
+
 //TODO : ADD FUNCTION TO COLLECT THE BOXES
-//TODO : SHOW PATTERN BEFORE HAND
+
 
 
 /**
@@ -59,6 +62,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+    public void StartClick(View v) {
+        // get new pattern
+        pattern = pickPattern(2,4);
+
+        //call function to turn pattern boxes blue
+        showPattern(pattern,false);
+
+        // timer to delay the reset
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        // turn the blue boxes back to white
+                        showPattern(pattern,true);
+                    }
+                }, 5000);
+
+
+
+
+
+    }
+
+
+    public void showPattern(ArrayList inputPattern,Boolean reset){
+
+        for(int i = 0;i<inputPattern.size();i++){
+            String currentButName =(String) pattern.get(i);
+            // get the button widget
+            Button currentBut;
+            currentBut = findViewById(getResources().getIdentifier(currentButName, "id",this.getPackageName()));
+            if(reset == false){
+                currentBut.setBackgroundColor(Color.BLUE);
+            }else{
+                currentBut.setBackgroundColor(Color.parseColor("#A9A9A9"));
+            }
+        }
+    }
+
+
+
     // Implement the OnClickListener callback
     public void onClick(View v) {
         // do something when the button is clicked
@@ -74,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void submitClick(View v) {
+        /* todo reset all the boxes to white */
 
         Log.i("submit click","it worked");
 
@@ -97,8 +141,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         Log.i("pattern","pattern:" + pattern);
         Log.i("submit results","results" + gridBoxes);
-        // check if submitted equals the pattern
 
+        // sort the lists
+        Collections.sort(pattern);
+        Collections.sort(gridBoxes);
+
+
+        // check if submitted equals the pattern
         if(gridBoxes.equals(pattern)){
             Log.i("Array match","true");
         }

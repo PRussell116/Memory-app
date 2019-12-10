@@ -12,6 +12,7 @@ import android.widget.Button;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 //TODO : ADD FUNCTION TO COLLECT THE BOXES
 //TODO : RANDOMLY CHOOSE BOXES
 //TODO : SHOW PATTERN BEFORE HAND
@@ -41,7 +42,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-
+   public ArrayList pattern = pickPattern(2,4);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button button = findViewById(R.id.grid00);
         // Register the onClick listener with the implementation above
         button.setOnClickListener(this);
+       // Log.i("pattern","pattern:" + pattern);
+
 
 
 
@@ -93,9 +96,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }
+        Log.i("pattern","pattern:" + pattern);
         Log.i("submit results","results" + gridBoxes);
+        // check if submitted equals the pattern
 
+        if(gridBoxes.equals(pattern)){
+            Log.i("Array match","true");
+        }
+        else{
+            Log.i("Array match","false");
+        }
 
+    }
+    public ArrayList<String>  pickPattern(int patternLength, int gridSize){
+        // make array of all possible choices
+        ArrayList<String> possibleBoxes;
+        possibleBoxes = new ArrayList<String>();
+        for(int i = 0;i<Math.sqrt(gridSize);i++){
+            for(int j = 0;j<Math.sqrt(gridSize);j++){
+                possibleBoxes.add("grid"+i+j);
+            }
+        }
+        // initalise the array for storing the pattern
+        ArrayList<String> patternList;
+        patternList = new ArrayList<String>();
+        for(int i = 0;i<patternLength;i++){
+            // pick random option from possibleBoxes and remove from the list
+            int choiceIndex = (int)(possibleBoxes.size() * Math.random());
+            patternList.add(possibleBoxes.get(choiceIndex));
+            possibleBoxes.remove(choiceIndex);
+        }
+        return patternList;
     }
 
 

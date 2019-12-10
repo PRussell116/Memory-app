@@ -14,7 +14,6 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.Arrays;
 //TODO : ADD FUNCTION TO COLLECT THE BOXES
-//TODO : RANDOMLY CHOOSE BOXES
 //TODO : SHOW PATTERN BEFORE HAND
 
 

@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
+import android.widget.TextView;
 
 
 import java.util.ArrayList;
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     public void StartClick(View v) {
-        // get new pattern
+        // get new pattern (pattern length and gridSize will be based on difficulty)
         pattern = pickPattern(2,4);
 
         //call function to turn pattern boxes blue
@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void showPattern(ArrayList inputPattern,Boolean reset){
+        /* todo disable the buttons during show pattern */
 
         for(int i = 0;i<inputPattern.size();i++){
             String currentButName =(String) pattern.get(i);
@@ -117,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void submitClick(View v) {
-        /* todo reset all the boxes to white */
+// TODO disable button presses during timeout phase
 
         Log.i("submit click","it worked");
 
@@ -136,6 +137,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int colorId = viewColor.getColor();
                 if(colorId == Color.BLUE){
                     gridBoxes.add(currentBoxId);
+                    // reset the box to white
+                    currentBut.setBackgroundColor(Color.parseColor("#A9A9A9"));
                 }
             }
         }
@@ -148,12 +151,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         // check if submitted equals the pattern
+        final TextView patternResultTextBox = findViewById(R.id.submitResults);
+        patternResultTextBox.setVisibility(View.VISIBLE);
         if(gridBoxes.equals(pattern)){
             Log.i("Array match","true");
+            patternResultTextBox.setText("Correct");
+            patternResultTextBox.setTextColor(Color.GREEN);
         }
         else{
             Log.i("Array match","false");
+            patternResultTextBox.setText("Incorrect");
+            patternResultTextBox.setTextColor(Color.RED);
         }
+        // hide the result box after some timer
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        // turn the blue boxes back to whit
+                      patternResultTextBox.setVisibility(View.INVISIBLE);
+                    }
+                }, 1000);
+
+
+
 
     }
     public ArrayList<String>  pickPattern(int patternLength, int gridSize){

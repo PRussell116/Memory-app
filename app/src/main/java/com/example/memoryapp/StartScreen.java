@@ -1,13 +1,13 @@
 package com.example.memoryapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-
+import android.content.Intent;
 import android.os.Bundle;
-
+import android.view.View;
 import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class StartScreen extends AppCompatActivity {
@@ -17,7 +17,7 @@ public class StartScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
         SeekBar diffBar;
-        diffBar = (SeekBar) findViewById(R.id.diffBar);
+        diffBar = findViewById(R.id.diffBar);
         diffBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener(){
 
             @Override
@@ -42,4 +42,11 @@ public class StartScreen extends AppCompatActivity {
         });
 
     }
+
+    public void sendMessage(View view) {
+        Intent intent = new Intent(StartScreen.this, MainActivity.class);
+        startActivity(intent);
+    }
+    // TODO ADD HOW TO PLAY PAGE
+
 }

@@ -1,22 +1,22 @@
 package com.example.memoryapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-
 import java.util.Collections;
 
-//TODO : ADD FUNCTION TO COLLECT THE BOXES
+
+/* TODO : ADD FUNCTION TO COLLECT THE BOXES */
 
 
 
@@ -45,6 +45,8 @@ import java.util.Collections;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
    public ArrayList pattern = pickPattern(2,4);
+    protected int winStreak = 0;
+    protected int patternLength = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,18 +66,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     public void StartClick(View v) {
         // get new pattern (pattern length and gridSize will be based on difficulty)
-        pattern = pickPattern(2,4);
+        pattern = pickPattern(patternLength, 4);
 
         //call function to turn pattern boxes blue
         showPattern(pattern,false);
 
         // timer to delay the reset
         new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // turn the blue boxes back to white
-                        showPattern(pattern,true);
-                    }
+                () -> {
+                    // turn the blue boxes back to white
+                    showPattern(pattern, true);
                 }, 5000);
 
 
@@ -93,9 +93,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // get the button widget
             Button currentBut;
             currentBut = findViewById(getResources().getIdentifier(currentButName, "id",this.getPackageName()));
-            if(reset == false){
-                currentBut.setBackgroundColor(Color.BLUE);
-            }else{
+            if (!reset) currentBut.setBackgroundColor(Color.BLUE);
+            else {
                 currentBut.setBackgroundColor(Color.parseColor("#A9A9A9"));
             }
         }
@@ -112,15 +111,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int colorId = viewColor.getColor();
         if(colorId == Color.BLUE){
             v.setBackgroundColor(Color.parseColor("#A9A9A9"));
-        }else{
-            v.setBackgroundColor(Color.BLUE);
-        }
+        } else v.setBackgroundColor(Color.BLUE);
     }
 
     public void submitClick(View v) {
 // TODO disable button presses during timeout phase
+// TODO clear the buttons during phase
+        //TODO WIN STREAK SAVING AND INCREASE DIFFICULTY
 
-        Log.i("submit click","it worked");
 
         // collect all the selected grid boxes
         ArrayList<String> gridBoxes;
@@ -157,19 +155,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.i("Array match","true");
             patternResultTextBox.setText("Correct");
             patternResultTextBox.setTextColor(Color.GREEN);
+            // increase the win streak and pattern len if too long increase the difficulty (more boxes)
+            winStreak++;
+            patternLength++;
+            if (patternLength > 3) {
+                // increase difficulty
+                patternLength = 3; // temp change
+            }
         }
         else{
             Log.i("Array match","false");
-            patternResultTextBox.setText("Incorrect");
             patternResultTextBox.setTextColor(Color.RED);
+
+            patternResultTextBox.setText("You scored: " + winStreak);
+            //TODO STORE THE SCORE
+            winStreak = 0;
+
+
+
+            /* after losing go to main menu after a delay */
+
+            Handler handler = new Handler();
+            handler.postDelayed(this::goToMainMenu, 1000);
+
         }
         // hide the result box after some timer
         new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // turn the blue boxes back to whit
-                      patternResultTextBox.setVisibility(View.INVISIBLE);
-                    }
+                () -> {
+                    // turn the blue boxes back to whit
+                    patternResultTextBox.setVisibility(View.INVISIBLE);
                 }, 1000);
 
 
@@ -179,15 +193,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public ArrayList<String>  pickPattern(int patternLength, int gridSize){
         // make array of all possible choices
         ArrayList<String> possibleBoxes;
-        possibleBoxes = new ArrayList<String>();
+        possibleBoxes = new ArrayList<>();
         for(int i = 0;i<Math.sqrt(gridSize);i++){
             for(int j = 0;j<Math.sqrt(gridSize);j++){
                 possibleBoxes.add("grid"+i+j);
             }
         }
-        // initalise the array for storing the pattern
+        // initialize the array for storing the pattern
         ArrayList<String> patternList;
-        patternList = new ArrayList<String>();
+        patternList = new ArrayList<>();
         for(int i = 0;i<patternLength;i++){
             // pick random option from possibleBoxes and remove from the list
             int choiceIndex = (int)(possibleBoxes.size() * Math.random());
@@ -195,6 +209,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             possibleBoxes.remove(choiceIndex);
         }
         return patternList;
+    }
+
+    public void goToMainMenu() {
+        Intent intent = new Intent(MainActivity.this, StartScreen.class);
+        startActivity(intent);
     }
 
 

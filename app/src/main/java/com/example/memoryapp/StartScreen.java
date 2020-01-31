@@ -26,14 +26,11 @@ public class StartScreen extends AppCompatActivity {
                 /* set the value of the diff box to correct val */
                 if(progress == 0) diffBox.setText("Easy");
                 else if(progress == 1){
-                    diffBox.setText("medium");
-                }
-                else{
-                    diffBox.setText("Hard");
-                }
+                    diffBox.setText("Medium");
+                } else diffBox.setText("Hard");
             }
             public void onStartTrackingTouch(SeekBar seekBar) {
-                // TODO Auto-generated method stub
+                /* TODO Auto-generated method stub */
             }
             public void onStopTrackingTouch(SeekBar seekBar) {
                 // TODO Auto-generated method stub
@@ -44,7 +41,14 @@ public class StartScreen extends AppCompatActivity {
     }
 
     public void sendMessage(View view) {
+        // find the difficulty
+        TextView diffBox = findViewById(R.id.diffBox);
+        CharSequence diffVal = diffBox.getText();
+
+
+
         Intent intent = new Intent(StartScreen.this, MainActivity.class);
+        intent.putExtra("diffVal", diffVal);
         startActivity(intent);
     }
     // TODO ADD HOW TO PLAY PAGE

@@ -1,5 +1,6 @@
 package com.example.memoryapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -14,39 +15,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
+
+import static java.lang.String.format;
 
 
 /* TODO : ADD FUNCTION TO COLLECT THE BOXES */
 
 
-
-/**
- * Skeleton of an Android Things activity.
- * <p>
- * Android Things peripheral APIs are accessible through the class
- * PeripheralManagerService. For example, the snippet below will open a GPIO pin and
- * set it to HIGH:
- *
- * <pre>{@code
- * PeripheralManagerService service = new PeripheralManagerService();
- * mLedGpio = service.openGpio("BCM6");
- * mLedGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
- * mLedGpio.setValue(true);
- * }</pre>
- * <p>
- * For more complex peripherals, look for an existing user-space driver, or implement one if none
- * is available.
- *
- * @see <a href="https://github.com/androidthings/contrib-drivers#readme">https://github.com/androidthings/contrib-drivers#readme</a>
- */
-
-
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-   public ArrayList pattern = pickPattern(2,4);
+
+    public ArrayList pattern;
     protected int winStreak = 0;
     protected int patternLength = 2;
+    public int gridSize = 4;//default grid size 4 for easy
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,15 +41,66 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Register the onClick listener with the implementation above
         button.setOnClickListener(this);
        // Log.i("pattern","pattern:" + pattern);
+        // find the value of the difficulty from the activity
 
 
+        //collect all the easy diff boxes
+        int[] easyBoxes = {R.id.grid00, R.id.grid01, R.id.grid10, R.id.grid11};
+        // collect all the medium diff boxes
+        int[] medBoxes = {R.id.gridMED00, R.id.gridMED01, R.id.gridMED02, R.id.gridMED10, R.id.gridMED11, R.id.gridMED12, R.id.gridMED20, R.id.gridMED21, R.id.gridMED22};
+
+
+        //turn boxes invisible
+        for (int easyBox : easyBoxes) {
+            Button currentButton = findViewById(easyBox);
+            currentButton.setVisibility(View.GONE);
+        }
+        for (int medBox : medBoxes) {
+            Button currentButton = findViewById(medBox);
+            currentButton.setVisibility(View.GONE);
+        }
+
+
+        String diffValue = Objects.requireNonNull(getIntent().getCharSequenceExtra("diffVal")).toString();
+
+        // default is easy
+
+
+        if (diffValue.equals("Medium")) {
+            gridSize = 9;
+            //set medium boxes to visible
+            for (int medBox : medBoxes) {
+                Button currentButton = findViewById(medBox);
+                currentButton.setVisibility(View.VISIBLE);
+            }
+
+        } else {
+            // default easy
+            gridSize = 4;
+            //set easy boxes to visible
+            for (int easyBox : easyBoxes) {
+                Button currentButton = findViewById(easyBox);
+                currentButton.setVisibility(View.VISIBLE);
+                Log.i("grid", "grid:" + gridSize);
+
+
+            }
+        }
+        pattern = pickPattern(2, gridSize, diffValue);
 
 
 
     }
     public void StartClick(View v) {
         // get new pattern (pattern length and gridSize will be based on difficulty)
-        pattern = pickPattern(patternLength, 4);
+        String diffValue = Objects.requireNonNull(getIntent().getCharSequenceExtra("diffVal")).toString();
+        int gridSize;
+        if (diffValue.equals("Medium")) {
+            gridSize = 9;
+        } else {
+            gridSize = 4;
+        }
+        pattern = pickPattern(patternLength, gridSize, diffValue);
 
         //call function to turn pattern boxes blue
         showPattern(pattern,false);
@@ -114,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else v.setBackgroundColor(Color.BLUE);
     }
 
+    @SuppressLint("SetTextI18n")
     public void submitClick(View v) {
 // TODO disable button presses during timeout phase
 // TODO clear the buttons during phase
@@ -122,15 +157,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // collect all the selected grid boxes
         ArrayList<String> gridBoxes;
-        gridBoxes = new ArrayList<String>();
+        gridBoxes = new ArrayList<>();
+        String diffValue = Objects.requireNonNull(getIntent().getCharSequenceExtra("diffVal")).toString();
 
-        for(int i= 0; i<2;i++){
-            for(int j=0;j<2;j++){
+        for (int i = 0; i < Math.pow(gridSize, 0.5); i++) {
+            for (int j = 0; j < Math.pow(gridSize, 0.5); j++) { // root of grid size to find the x and y
                 // create the x and y coordinates of the panel
-                String currentBoxId = "grid"+i+j;
+                String currentBoxId;
+                if (diffValue.equals("Medium")) {
+                    currentBoxId = "gridMED" + i + j;
+                } else {
+                    currentBoxId = "grid" + i + j;
+                }
                 Button currentBut;
                 currentBut = findViewById(getResources().getIdentifier(currentBoxId, "id",this.getPackageName()));
-               // if its blue add it to the list of selected
+                // if its blue add it to the list of selected
                 ColorDrawable viewColor =(ColorDrawable) currentBut.getBackground();
                 int colorId = viewColor.getColor();
                 if(colorId == Color.BLUE){
@@ -162,12 +203,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // increase difficulty
                 patternLength = 3; // temp change
             }
-        }
-        else{
+        } else {
             Log.i("Array match","false");
             patternResultTextBox.setTextColor(Color.RED);
 
-            patternResultTextBox.setText("You scored: " + winStreak);
+            patternResultTextBox.setText(format("You scored: %d", winStreak));
             //TODO STORE THE SCORE
             winStreak = 0;
 
@@ -187,16 +227,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }, 1000);
 
 
-
-
     }
-    public ArrayList<String>  pickPattern(int patternLength, int gridSize){
+
+    public ArrayList<String> pickPattern(int patternLength, int gridSize, String diff) {
         // make array of all possible choices
         ArrayList<String> possibleBoxes;
         possibleBoxes = new ArrayList<>();
         for(int i = 0;i<Math.sqrt(gridSize);i++){
             for(int j = 0;j<Math.sqrt(gridSize);j++){
-                possibleBoxes.add("grid"+i+j);
+                if (diff.equals("Medium")) {
+                    possibleBoxes.add("gridMED" + i + j);
+                } else {
+                    possibleBoxes.add("grid" + i + j);
+                }
             }
         }
         // initialize the array for storing the pattern

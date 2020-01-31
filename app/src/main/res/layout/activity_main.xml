@@ -7,6 +7,133 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/gridMED22"
+        android:layout_width="110dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="28dp"
+        android:background="#A9A9A9"
+        android:onClick="onClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gridMED12"
+        app:layout_constraintTop_toBottomOf="@+id/gridMED21"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/gridMED12"
+        android:layout_width="110dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="13dp"
+        android:background="#A9A9A9"
+        android:onClick="onClick"
+        app:layout_constraintEnd_toStartOf="@+id/gridMED22"
+        app:layout_constraintStart_toEndOf="@+id/gridMED02"
+        app:layout_constraintTop_toBottomOf="@+id/gridMED11"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/gridMED02"
+        android:layout_width="110dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="8dp"
+        android:background="#A9A9A9"
+        android:onClick="onClick"
+        app:layout_constraintEnd_toStartOf="@+id/gridMED12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridMED01"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/gridMED01"
+        android:layout_width="110dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="8dp"
+        android:background="#A9A9A9"
+        android:onClick="onClick"
+        app:layout_constraintEnd_toStartOf="@+id/gridMED11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridMED00"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/gridMED21"
+        android:layout_width="110dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="28dp"
+        android:background="#A9A9A9"
+        android:onClick="onClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gridMED11"
+        app:layout_constraintTop_toBottomOf="@+id/gridMED20"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/gridMED11"
+        android:layout_width="110dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="13dp"
+        android:background="#A9A9A9"
+        android:onClick="onClick"
+        app:layout_constraintEnd_toStartOf="@+id/gridMED21"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/gridMED01"
+        app:layout_constraintTop_toBottomOf="@+id/gridMED10"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/gridMED10"
+        android:layout_width="110dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="13dp"
+        android:background="#A9A9A9"
+        android:onClick="onClick"
+        app:layout_constraintEnd_toStartOf="@+id/gridMED20"
+        app:layout_constraintStart_toEndOf="@+id/gridMED00"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/gridMED20"
+        android:layout_width="110dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="28dp"
+        android:background="#A9A9A9"
+        android:onClick="onClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gridMED10"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/gridMED00"
+        android:layout_width="110dp"
+        android:layout_height="78dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="8dp"
+        android:background="#A9A9A9"
+        android:onClick="onClick"
+        app:layout_constraintEnd_toStartOf="@+id/gridMED10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <Button
         android:id="@+id/grid11"
         android:layout_width="144dp"
         android:layout_height="119dp"
@@ -19,7 +146,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/grid01"
-        app:layout_constraintTop_toBottomOf="@+id/grid10" />
+        app:layout_constraintTop_toBottomOf="@+id/grid10"
+        tools:visibility="gone" />
 
     <Button
         android:id="@+id/grid10"
@@ -34,7 +162,8 @@
         app:layout_constraintBottom_toTopOf="@+id/grid11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/grid00"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone" />
 
     <Button
         android:id="@+id/grid01"
@@ -49,7 +178,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/grid11"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grid00" />
+        app:layout_constraintTop_toBottomOf="@+id/grid00"
+        tools:visibility="gone" />
 
     <Button
         android:id="@+id/grid00"
@@ -64,26 +194,30 @@
         app:layout_constraintBottom_toTopOf="@+id/grid01"
         app:layout_constraintEnd_toStartOf="@+id/grid10"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="87dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="63dp"
+        android:layout_marginEnd="65dp"
+        android:layout_marginBottom="57dp"
         android:onClick="submitClick"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grid01" />
+        app:layout_constraintStart_toEndOf="@+id/tempStartBut"
+        app:layout_constraintTop_toBottomOf="@+id/grid11"
+        app:layout_constraintVertical_bias="0.941" />
 
     <Button
         android:id="@+id/tempStartBut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="65dp"
         android:layout_marginTop="62dp"
         android:layout_marginEnd="14dp"
         android:layout_marginBottom="57dp"
@@ -93,6 +227,7 @@
         app:layout_constraintEnd_toStartOf="@+id/button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/grid01"
+        app:layout_constraintVertical_bias="0.941"
         tools:text="Start" />
 
     <TextView

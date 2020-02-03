@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -104,23 +105,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //call function to turn pattern boxes blue
         showPattern(pattern,false);
+        //lock the buttons on screen so they cannot be pressed
+        buttonLock(false);
 
         // timer to delay the reset
         new android.os.Handler().postDelayed(
                 () -> {
                     // turn the blue boxes back to white
                     showPattern(pattern, true);
+
+
+                    //unlock the button
+                    buttonLock(true);
                 }, 5000);
-
-
-
 
 
     }
 
 
     public void showPattern(ArrayList inputPattern,Boolean reset){
-        /* todo disable the buttons during show pattern */
+
 
         for(int i = 0;i<inputPattern.size();i++){
             String currentButName =(String) pattern.get(i);
@@ -132,14 +136,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 currentBut.setBackgroundColor(Color.parseColor("#A9A9A9"));
             }
         }
+
     }
 
 
 
     // Implement the OnClickListener callback
     public void onClick(View v) {
-        // do something when the button is clicked
-        Log.i("clicker","it worked");
 
         ColorDrawable viewColor =(ColorDrawable) v.getBackground();
         int colorId = viewColor.getColor();
@@ -150,8 +153,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @SuppressLint("SetTextI18n")
     public void submitClick(View v) {
-// TODO disable button presses during timeout phase
-// TODO clear the buttons during phase
+
+        // TODO prevent submitting empty
         //TODO WIN STREAK SAVING AND INCREASE DIFFICULTY
 
 
@@ -257,6 +260,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void goToMainMenu() {
         Intent intent = new Intent(MainActivity.this, StartScreen.class);
         startActivity(intent);
+    }
+
+    public void buttonLock(Boolean lockState) {
+        // collect all buttons
+
+        ViewGroup screenContainer = findViewById(R.id.screenContainer);
+        // loop children of containter
+        for (int i = 0; i < screenContainer.getChildCount(); i++) {
+            View currentBut = screenContainer.getChildAt(i);
+            currentBut.setEnabled(lockState);
+
+
+        }
+        // testing
+        Button testbut = findViewById(R.id.grid00);
+        Log.d("STATE", "buttonLock: " + testbut.isEnabled());
+
+
     }
 
 

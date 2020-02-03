@@ -14,8 +14,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Objects;
 
 import static java.lang.String.format;
@@ -31,10 +34,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected int winStreak = 0;
     protected int patternLength = 2;
     public int gridSize = 4;//default grid size 4 for easy
+    DatabaseHelper mDatabaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mDatabaseHelper = new DatabaseHelper(this);
         setContentView(R.layout.activity_main);
 
         // Capture our button from layout
@@ -115,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     showPattern(pattern, true);
 
 
-                    //unlock the button
+                    //unlock the buttons
                     buttonLock(true);
                 }, 5000);
 
@@ -212,6 +217,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             patternResultTextBox.setText(format("You scored: %d", winStreak));
             //TODO STORE THE SCORE
+
+
+            DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+            Date dateobj = new Date();
+            String formattedDate = df.format(dateobj);
+
+            addData(winStreak, formattedDate);
+
             winStreak = 0;
 
 
@@ -277,6 +290,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button testbut = findViewById(R.id.grid00);
         Log.d("STATE", "buttonLock: " + testbut.isEnabled());
 
+
+    }
+
+    public void addData(int newEntry, String date) {
+        boolean insertData = mDatabaseHelper.addData(newEntry, date);
+        if (insertData) {
+            Log.d("", "addData: data inserted");
+        } else {
+            Log.d("", "addData: data failed to insert");
+        }
+        /*
+        database stored in emulator
+
+        /data/data/com.example.memoryapp/databases/scoreTable
+
+        */
 
     }
 

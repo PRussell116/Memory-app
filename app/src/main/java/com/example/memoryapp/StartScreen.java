@@ -40,7 +40,7 @@ public class StartScreen extends AppCompatActivity {
 
     }
 
-    public void sendMessage(View view) {
+    public void startMain(View view) {
         // find the difficulty
         TextView diffBox = findViewById(R.id.diffBox);
         CharSequence diffVal = diffBox.getText();
@@ -49,6 +49,13 @@ public class StartScreen extends AppCompatActivity {
 
         Intent intent = new Intent(StartScreen.this, MainActivity.class);
         intent.putExtra("diffVal", diffVal);
+        startActivity(intent);
+    }
+
+
+    public void startScore(View view) {
+
+        Intent intent = new Intent(StartScreen.this, scoreScreen.class);
         startActivity(intent);
     }
     // TODO ADD HOW TO PLAY PAGE

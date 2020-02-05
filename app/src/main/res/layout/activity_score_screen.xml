@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".scoreScreen">
+
+    <TextView
+        android:id="@+id/previousScore"
+        android:layout_width="95dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="190dp"
+        android:gravity="center"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="HardcodedText"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/previousScoreLabel"
+        android:layout_width="95dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="190dp"
+        android:gravity="center"
+        android:text="Previous Score"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText"
+        tools:text="Previous Score" />
+
+    <LinearLayout
+        android:layout_width="190dp"
+        android:layout_height="253dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.239">
+
+        <LinearLayout
+            android:layout_width="92dp"
+            android:layout_height="250dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/no1"
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="1."
+                tools:ignore="HardcodedText"
+                tools:text="1." />
+
+            <TextView
+                android:id="@+id/no2"
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="2."
+                tools:ignore="HardcodedText"
+                tools:text="2." />
+
+            <TextView
+                android:id="@+id/no3"
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="3."
+                tools:ignore="HardcodedText"
+                tools:text="3." />
+
+            <TextView
+                android:id="@+id/no4"
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="4."
+                tools:ignore="HardcodedText"
+                tools:text="4." />
+
+            <TextView
+                android:id="@+id/no5"
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="5."
+                tools:ignore="HardcodedText"
+                tools:text="5." />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="98dp"
+            android:layout_height="250dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/score1"
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="TextView"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/score2"
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="TextView"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/score3"
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+
+                android:gravity="center"
+                android:text="TextView"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/score4"
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="TextView"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/score5"
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="TextView"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/highScoreTitle"
+        android:layout_width="189dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="111dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="111dp"
+        android:gravity="center"
+        android:text="High Scores"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText"
+        tools:text="High Scores" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="59dp"
+        android:layout_marginBottom="122dp"
+        android:onClick="backToMain"
+        android:text="temp back button"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/previousScore"
+        tools:ignore="HardcodedText"
+        tools:text="temp back button" />
+</androidx.constraintlayout.widget.ConstraintLayout>

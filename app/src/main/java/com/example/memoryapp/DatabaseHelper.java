@@ -2,6 +2,7 @@ package com.example.memoryapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -35,6 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    // function to insert the new data
     public boolean addData(int score, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -47,5 +49,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //check if inserted correctly
         return result != -1;
+
+    }
+
+    public Cursor getData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME;
+        Cursor data = db.rawQuery(query, null);
+        return data;
+
     }
 }

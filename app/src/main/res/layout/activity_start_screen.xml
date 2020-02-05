@@ -7,32 +7,44 @@
     tools:context=".StartScreen">
 
     <Button
+        android:id="@+id/scoresBut"
+        android:layout_width="116dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="76dp"
+        android:onClick="startScore"
+        android:text="Scores"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startBut" />
+
+    <Button
         android:id="@+id/startBut"
         android:layout_width="116dp"
         android:layout_height="49dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="531dp"
         android:layout_marginBottom="151dp"
-        android:onClick="sendMessage"
+        android:onClick="startMain"
         android:text="Start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/instrBut"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         tools:text="Start" />
 
     <Button
         android:id="@+id/instrBut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="531dp"
+        android:layout_marginStart="42dp"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="152dp"
+        android:layout_marginBottom="14dp"
         android:text="How to play"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/scoresBut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/startBut"
-        app:layout_constraintTop_toTopOf="parent"
         tools:text="How to play" />
 
     <SeekBar

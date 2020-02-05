@@ -159,8 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("SetTextI18n")
     public void submitClick(View v) {
 
-        // TODO prevent submitting empty
-        //TODO WIN STREAK SAVING AND INCREASE DIFFICULTY
+        //TODO INCREASE DIFFICULTY
 
 
         // collect all the selected grid boxes
@@ -216,8 +215,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             patternResultTextBox.setTextColor(Color.RED);
 
             patternResultTextBox.setText(format("You scored: %d", winStreak));
-            //TODO STORE THE SCORE
 
+            // store the score and date
 
             DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
             Date dateobj = new Date();

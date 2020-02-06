@@ -20,13 +20,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Random;
 
 import static java.lang.String.format;
 
 
 /* TODO : ADD FUNCTION TO COLLECT THE BOXES */
 
-
+//TODO SOME BUG PREVENTING 14 BEING ADDED STARTING ON MEDIUM BUG
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected int patternLength = 2;
     public int gridSize = 4;//default grid size 4 for easy
     DatabaseHelper mDatabaseHelper;
+    String diffValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,49 +51,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        // Log.i("pattern","pattern:" + pattern);
         // find the value of the difficulty from the activity
 
-
-        //collect all the easy diff boxes
-        int[] easyBoxes = {R.id.grid00, R.id.grid01, R.id.grid10, R.id.grid11};
-        // collect all the medium diff boxes
-        int[] medBoxes = {R.id.gridMED00, R.id.gridMED01, R.id.gridMED02, R.id.gridMED10, R.id.gridMED11, R.id.gridMED12, R.id.gridMED20, R.id.gridMED21, R.id.gridMED22};
-
-
-        //turn boxes invisible
-        for (int easyBox : easyBoxes) {
-            Button currentButton = findViewById(easyBox);
-            currentButton.setVisibility(View.GONE);
+        diffValue = Objects.requireNonNull(getIntent().getCharSequenceExtra("diffVal")).toString();
+        if (diffValue.equals("Difficulty")) {
+            diffValue = "Easy";
         }
-        for (int medBox : medBoxes) {
-            Button currentButton = findViewById(medBox);
-            currentButton.setVisibility(View.GONE);
-        }
+        // turn the right boxes visible
+        changeDiff();
 
-
-        String diffValue = Objects.requireNonNull(getIntent().getCharSequenceExtra("diffVal")).toString();
-
-        // default is easy
-
-
-        if (diffValue.equals("Medium")) {
-            gridSize = 9;
-            //set medium boxes to visible
-            for (int medBox : medBoxes) {
-                Button currentButton = findViewById(medBox);
-                currentButton.setVisibility(View.VISIBLE);
-            }
-
-        } else {
-            // default easy
-            gridSize = 4;
-            //set easy boxes to visible
-            for (int easyBox : easyBoxes) {
-                Button currentButton = findViewById(easyBox);
-                currentButton.setVisibility(View.VISIBLE);
-                Log.i("grid", "grid:" + gridSize);
-
-
-            }
-        }
         pattern = pickPattern(2, gridSize, diffValue);
 
 
@@ -99,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     public void StartClick(View v) {
         // get new pattern (pattern length and gridSize will be based on difficulty)
-        String diffValue = Objects.requireNonNull(getIntent().getCharSequenceExtra("diffVal")).toString();
         int gridSize;
         if (diffValue.equals("Medium")) {
             gridSize = 9;
@@ -165,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // collect all the selected grid boxes
         ArrayList<String> gridBoxes;
         gridBoxes = new ArrayList<>();
-        String diffValue = Objects.requireNonNull(getIntent().getCharSequenceExtra("diffVal")).toString();
+
 
         for (int i = 0; i < Math.pow(gridSize, 0.5); i++) {
             for (int j = 0; j < Math.pow(gridSize, 0.5); j++) { // root of grid size to find the x and y
@@ -206,10 +171,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // increase the win streak and pattern len if too long increase the difficulty (more boxes)
             winStreak++;
             patternLength++;
-            if (patternLength > 3) {
-                // increase difficulty
-                patternLength = 3; // temp change
+
+
+            if (patternLength > 3 && diffValue.equals("Easy")) {
+                // set diff to medium
+                diffValue = "Medium";
+                // turn boxes invisible and medium to visible
+                changeDiff();
+
+
+            } else if (patternLength > 7) {
+                Random r = new Random();
+                patternLength = r.nextInt(8); //change so its only long pattern
             }
+            // when max pattern len on hardest diff is reached prevent going too high, choose random long pattern
+
+            //TODO ADD HARD AND ITS TRANSITION
+
+
+
+
         } else {
             Log.i("Array match","false");
             patternResultTextBox.setTextColor(Color.RED);
@@ -219,8 +200,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // store the score and date
 
             DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-            Date dateobj = new Date();
-            String formattedDate = df.format(dateobj);
+            Date dateObj = new Date();
+            String formattedDate = df.format(dateObj);
 
             addData(winStreak, formattedDate);
 
@@ -237,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // hide the result box after some timer
         new android.os.Handler().postDelayed(
                 () -> {
-                    // turn the blue boxes back to whit
+                    // turn the blue boxes back to white
                     patternResultTextBox.setVisibility(View.INVISIBLE);
                 }, 1000);
 
@@ -278,18 +259,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // collect all buttons
 
         ViewGroup screenContainer = findViewById(R.id.screenContainer);
-        // loop children of containter
+        // loop children of container
         for (int i = 0; i < screenContainer.getChildCount(); i++) {
             View currentBut = screenContainer.getChildAt(i);
             currentBut.setEnabled(lockState);
 
-
         }
-        // testing
-        Button testbut = findViewById(R.id.grid00);
-        Log.d("STATE", "buttonLock: " + testbut.isEnabled());
-
-
     }
 
     public void addData(int newEntry, String date) {
@@ -305,6 +280,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         /data/data/com.example.memoryapp/databases/scoreTable
 
         */
+
+    }
+
+    public void changeDiff() {
+
+        //collect all the easy diff boxes
+        int[] easyBoxes = {R.id.grid00, R.id.grid01, R.id.grid10, R.id.grid11};
+        // collect all the medium diff boxes
+        int[] medBoxes = {R.id.gridMED00, R.id.gridMED01, R.id.gridMED02, R.id.gridMED10, R.id.gridMED11, R.id.gridMED12, R.id.gridMED20, R.id.gridMED21, R.id.gridMED22};
+
+
+        //turn boxes invisible
+        for (int easyBox : easyBoxes) {
+            Button currentButton = findViewById(easyBox);
+            currentButton.setVisibility(View.GONE);
+        }
+        for (int medBox : medBoxes) {
+            Button currentButton = findViewById(medBox);
+            currentButton.setVisibility(View.GONE);
+        }
+
+        // default is easy
+
+
+        if (diffValue.equals("Medium")) {
+            gridSize = 9;
+            winStreak = 3; // start at 3 when you choose medium
+
+            //set medium boxes to visible
+            for (int medBox : medBoxes) {
+                Button currentButton = findViewById(medBox);
+                currentButton.setVisibility(View.VISIBLE);
+            }
+
+        } else {
+            // default easy
+            gridSize = 4;
+            //set easy boxes to visible
+            for (int easyBox : easyBoxes) {
+                Button currentButton = findViewById(easyBox);
+                currentButton.setVisibility(View.VISIBLE);
+                Log.i("grid", "grid:" + gridSize);
+
+
+            }
+        }
 
     }
 

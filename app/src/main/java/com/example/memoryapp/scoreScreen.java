@@ -36,27 +36,34 @@ public class scoreScreen extends AppCompatActivity {
         Cursor data = mDatabaseHelper.getData();
         // Log.d("","sql 1st row data:" + data.getString(1));
         //get top 5
-        ArrayList<String> scoreData = new ArrayList<>();
+        ArrayList<Integer> scoreData = new ArrayList<>();
         while (data.moveToNext()) {
-            scoreData.add(data.getString(1));
+            try {
+                scoreData.add(data.getInt(1));
+            } catch (Exception e) {
+                // add zero if exception, possible not enough data
+                scoreData.add(0);
+            }
+
 
         }
         // get most recent
-        String latestScore = scoreData.get(scoreData.size() - 1);
+        Integer latestScore = scoreData.get(scoreData.size() - 1);
         //insert into box
         TextView prevScoreBox = findViewById(R.id.previousScore);
-        prevScoreBox.setText(latestScore);
+        prevScoreBox.setText(String.valueOf(latestScore));
+
 
 
         Collections.sort(scoreData);
         //get top 5
-        ArrayList<String> topFive = new ArrayList<>(scoreData.subList(scoreData.size() - 5, scoreData.size()));
+        ArrayList<Integer> topFive = new ArrayList<>(scoreData.subList(scoreData.size() - 5, scoreData.size()));
         Collections.reverse(topFive);
         //insert into page
         for (int i = 0; i < 5; i++) {
             String boxId = "score" + (i + 1);
             TextView currentBox = findViewById(getResources().getIdentifier(boxId, "id", this.getPackageName()));
-            currentBox.setText(topFive.get(i));
+            currentBox.setText(String.valueOf(topFive.get(i)));
 
         }
 

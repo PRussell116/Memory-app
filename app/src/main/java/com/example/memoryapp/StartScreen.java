@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
+//todo make screens for each size
 public class StartScreen extends AppCompatActivity {
 
     @Override

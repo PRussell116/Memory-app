@@ -27,7 +27,6 @@ import static java.lang.String.format;
 
 /* TODO : ADD FUNCTION TO COLLECT THE BOXES */
 
-//TODO SOME BUG PREVENTING 14 BEING ADDED STARTING ON MEDIUM BUG
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -61,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pattern = pickPattern(2, gridSize, diffValue);
 
 
-
     }
     public void StartClick(View v) {
         // get new pattern (pattern length and gridSize will be based on difficulty)
@@ -76,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //call function to turn pattern boxes blue
         showPattern(pattern,false);
         //lock the buttons on screen so they cannot be pressed
-        buttonLock(false);
+        buttonLock(false, true);
 
         // timer to delay the reset
         new android.os.Handler().postDelayed(
@@ -86,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                     //unlock the buttons
-                    buttonLock(true);
+                    buttonLock(true, true);
                 }, 5000);
 
 
@@ -123,9 +121,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @SuppressLint("SetTextI18n")
     public void submitClick(View v) {
-
-        //TODO INCREASE DIFFICULTY
-
 
         // collect all the selected grid boxes
         ArrayList<String> gridBoxes;
@@ -168,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.i("Array match","true");
             patternResultTextBox.setText("Correct");
             patternResultTextBox.setTextColor(Color.GREEN);
+            patternResultTextBox.bringToFront();
             // increase the win streak and pattern len if too long increase the difficulty (more boxes)
             winStreak++;
             patternLength++;
@@ -184,6 +180,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Random r = new Random();
                 patternLength = r.nextInt(8); //change so its only long pattern
             }
+
             // when max pattern len on hardest diff is reached prevent going too high, choose random long pattern
 
             //TODO ADD HARD AND ITS TRANSITION
@@ -196,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             patternResultTextBox.setTextColor(Color.RED);
 
             patternResultTextBox.setText(format("You scored: %d", winStreak));
-
+            patternResultTextBox.bringToFront();
             // store the score and date
 
             DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
@@ -220,6 +217,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 () -> {
                     // turn the blue boxes back to white
                     patternResultTextBox.setVisibility(View.INVISIBLE);
+                    // set pattern to null so you cannot repeat the last input
+                    buttonLock(false, false);
                 }, 1000);
 
 
@@ -255,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    public void buttonLock(Boolean lockState) {
+    public void buttonLock(Boolean lockState, boolean lockStartSub) {
         // collect all buttons
 
         ViewGroup screenContainer = findViewById(R.id.screenContainer);
@@ -264,7 +263,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             View currentBut = screenContainer.getChildAt(i);
             currentBut.setEnabled(lockState);
 
+        }//only lock the grid buttons
+        if (lockStartSub == false) {
+            View submit = findViewById(R.id.submitBut);
+            View start = findViewById(R.id.StartBut);
+            submit.setEnabled(true);
+            start.setEnabled(true);
         }
+
     }
 
     public void addData(int newEntry, String date) {

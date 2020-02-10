@@ -38,15 +38,16 @@ public class scoreScreen extends AppCompatActivity {
         //get top 5
         ArrayList<Integer> scoreData = new ArrayList<>();
         while (data.moveToNext()) {
-            try {
+//            try {
                 scoreData.add(data.getInt(1));
-            } catch (Exception e) {
+//            } catch (Exception e) {
                 // add zero if exception, possible not enough data
-                scoreData.add(0);
-            }
+//                scoreData.add(0);
+//            }
 
 
         }
+
         // get most recent
         Integer latestScore = scoreData.get(scoreData.size() - 1);
         //insert into box
@@ -54,16 +55,20 @@ public class scoreScreen extends AppCompatActivity {
         prevScoreBox.setText(String.valueOf(latestScore));
 
 
-
+        // sort and order the score by descending
         Collections.sort(scoreData);
-        //get top 5
-        ArrayList<Integer> topFive = new ArrayList<>(scoreData.subList(scoreData.size() - 5, scoreData.size()));
-        Collections.reverse(topFive);
+        Collections.reverse(scoreData);
+
         //insert into page
         for (int i = 0; i < 5; i++) {
             String boxId = "score" + (i + 1);
             TextView currentBox = findViewById(getResources().getIdentifier(boxId, "id", this.getPackageName()));
-            currentBox.setText(String.valueOf(topFive.get(i)));
+            try {
+                currentBox.setText(String.valueOf(scoreData.get(i)));
+            } catch (Exception e) {
+                currentBox.setText("0");
+            }
+
 
         }
 

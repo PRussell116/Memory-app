@@ -13,10 +13,10 @@
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="190dp"
         android:gravity="center"
-        android:text="TextView"
+        android:text="@string/textview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="HardcodedText"
+
         tools:visibility="visible" />
 
     <TextView
@@ -26,11 +26,11 @@
         android:layout_marginStart="64dp"
         android:layout_marginBottom="190dp"
         android:gravity="center"
-        android:text="Previous Score"
+        android:text="@string/previous_score"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="HardcodedText"
+
         tools:text="Previous Score" />
 
     <LinearLayout
@@ -55,8 +55,8 @@
                 android:layout_width="95dp"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="1."
-                tools:ignore="HardcodedText"
+                android:text="@string/_1"
+                
                 tools:text="1." />
 
             <TextView
@@ -64,8 +64,8 @@
                 android:layout_width="95dp"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="2."
-                tools:ignore="HardcodedText"
+                android:text="@string/_2"
+                
                 tools:text="2." />
 
             <TextView
@@ -73,8 +73,8 @@
                 android:layout_width="95dp"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="3."
-                tools:ignore="HardcodedText"
+                android:text="@string/_3"
+                
                 tools:text="3." />
 
             <TextView
@@ -82,8 +82,8 @@
                 android:layout_width="95dp"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="4."
-                tools:ignore="HardcodedText"
+                android:text="@string/_4"
+                
                 tools:text="4." />
 
             <TextView
@@ -91,8 +91,8 @@
                 android:layout_width="95dp"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="5."
-                tools:ignore="HardcodedText"
+                android:text="@string/_5"
+                
                 tools:text="5." />
 
         </LinearLayout>
@@ -107,16 +107,14 @@
                 android:layout_width="95dp"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="TextView"
-                tools:ignore="HardcodedText" />
+                android:text="@string/textview" />
 
             <TextView
                 android:id="@+id/score2"
                 android:layout_width="95dp"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="TextView"
-                tools:ignore="HardcodedText" />
+                android:text="@string/textview" />
 
             <TextView
                 android:id="@+id/score3"
@@ -124,24 +122,21 @@
                 android:layout_height="50dp"
 
                 android:gravity="center"
-                android:text="TextView"
-                tools:ignore="HardcodedText" />
+                android:text="@string/textview" />
 
             <TextView
                 android:id="@+id/score4"
                 android:layout_width="95dp"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="TextView"
-                tools:ignore="HardcodedText" />
+                android:text="@string/textview" />
 
             <TextView
                 android:id="@+id/score5"
                 android:layout_width="95dp"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="TextView"
-                tools:ignore="HardcodedText" />
+                android:text="@string/textview" />
         </LinearLayout>
 
     </LinearLayout>
@@ -154,13 +149,13 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="111dp"
         android:gravity="center"
-        android:text="High Scores"
+        android:text="@string/high_scores"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText"
+
         tools:text="High Scores" />
 
     <Button
@@ -170,12 +165,12 @@
         android:layout_marginTop="59dp"
         android:layout_marginBottom="122dp"
         android:onClick="backToMain"
-        android:text="temp back button"
+        android:text="@string/main_menu"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/previousScore"
-        tools:ignore="HardcodedText"
-        tools:text="temp back button" />
+
+        tools:text="Main Menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

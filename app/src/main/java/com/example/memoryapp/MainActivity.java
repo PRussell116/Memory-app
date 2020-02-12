@@ -25,7 +25,6 @@ import java.util.Random;
 import static java.lang.String.format;
 
 
-/* TODO : ADD FUNCTION TO COLLECT THE BOXES */
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button button = findViewById(R.id.grid00);
         // Register the onClick listener with the implementation above
         button.setOnClickListener(this);
-       // Log.i("pattern","pattern:" + pattern);
+        // Log.i("pattern","pattern:" + pattern);
         // find the value of the difficulty from the activity
 
         diffValue = Objects.requireNonNull(getIntent().getCharSequenceExtra("diffVal")).toString();
@@ -61,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
     public void StartClick(View v) {
         // get new pattern (pattern length and gridSize will be based on difficulty)
         int gridSize;
@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pattern = pickPattern(patternLength, gridSize, diffValue);
 
         //call function to turn pattern boxes blue
-        showPattern(pattern,false);
+        showPattern(pattern, false);
         //lock the buttons on screen so they cannot be pressed
-        buttonLock(false, true);
+        buttonLock(false, true, true);
 
         // timer to delay the reset
         new android.os.Handler().postDelayed(
@@ -85,22 +85,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     showPattern(pattern, true);
 
 
-                    //unlock the buttons
-                    buttonLock(true, true);
+                    //unlock the buttons but lock the start button
+                    buttonLock(true, false, true);
                 }, 5000);
 
 
     }
 
 
-    public void showPattern(ArrayList inputPattern,Boolean reset){
+    public void showPattern(ArrayList inputPattern, Boolean reset) {
 
 
-        for(int i = 0;i<inputPattern.size();i++){
-            String currentButName =(String) pattern.get(i);
+        for (int i = 0; i < inputPattern.size(); i++) {
+            String currentButName = (String) pattern.get(i);
             // get the button widget
             Button currentBut;
-            currentBut = findViewById(getResources().getIdentifier(currentButName, "id",this.getPackageName()));
+            currentBut = findViewById(getResources().getIdentifier(currentButName, "id", this.getPackageName()));
             if (!reset) currentBut.setBackgroundColor(Color.BLUE);
             else {
                 currentBut.setBackgroundColor(Color.parseColor("#A9A9A9"));
@@ -108,15 +108,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-//TODO PREVENT PRESSING THE START BUTTON TWICE
+
 
 
     // Implement the OnClickListener callback
     public void onClick(View v) {
 
-        ColorDrawable viewColor =(ColorDrawable) v.getBackground();
+        ColorDrawable viewColor = (ColorDrawable) v.getBackground();
         int colorId = viewColor.getColor();
-        if(colorId == Color.BLUE){
+        if (colorId == Color.BLUE) {
             v.setBackgroundColor(Color.parseColor("#A9A9A9"));
         } else v.setBackgroundColor(Color.BLUE);
     }
@@ -141,19 +141,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     currentBoxId = "grid" + i + j;
                 }
                 Button currentBut;
-                currentBut = findViewById(getResources().getIdentifier(currentBoxId, "id",this.getPackageName()));
+                currentBut = findViewById(getResources().getIdentifier(currentBoxId, "id", this.getPackageName()));
                 // if its blue add it to the list of selected
-                ColorDrawable viewColor =(ColorDrawable) currentBut.getBackground();
+                ColorDrawable viewColor = (ColorDrawable) currentBut.getBackground();
                 int colorId = viewColor.getColor();
-                if(colorId == Color.BLUE){
+                if (colorId == Color.BLUE) {
                     gridBoxes.add(currentBoxId);
                     // reset the box to white
                     currentBut.setBackgroundColor(Color.parseColor("#A9A9A9"));
                 }
             }
         }
-        Log.i("pattern","pattern:" + pattern);
-        Log.i("submit results","results" + gridBoxes);
+        Log.i("pattern", "pattern:" + pattern);
+        Log.i("submit results", "results" + gridBoxes);
 
         // sort the lists
         Collections.sort(pattern);
@@ -163,8 +163,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // check if submitted equals the pattern
         final TextView patternResultTextBox = findViewById(R.id.submitResults);
         patternResultTextBox.setVisibility(View.VISIBLE);
-        if(gridBoxes.equals(pattern)){
-            Log.i("Array match","true");
+        if (gridBoxes.equals(pattern)) {
+            Log.i("Array match", "true");
             patternResultTextBox.setText("Correct");
             patternResultTextBox.setTextColor(Color.GREEN);
             patternResultTextBox.bringToFront();
@@ -192,13 +192,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             // when max pattern len on hardest diff is reached prevent going too high, choose random long pattern
 
-            //TODO ADD HARD AND ITS TRANSITION
-
-
-
 
         } else {
-            Log.i("Array match","false");
+            Log.i("Array match", "false");
             patternResultTextBox.setTextColor(Color.RED);
 
             patternResultTextBox.setText(format("You scored: %d", winStreak));
@@ -227,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     // turn the blue boxes back to white
                     patternResultTextBox.setVisibility(View.INVISIBLE);
                     // set pattern to null so you cannot repeat the last input
-                    buttonLock(false, false);
+                    buttonLock(true, false, false);
                 }, 1000);
 
 
@@ -237,8 +233,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // make array of all possible choices
         ArrayList<String> possibleBoxes;
         possibleBoxes = new ArrayList<>();
-        for(int i = 0;i<Math.sqrt(gridSize);i++){
-            for(int j = 0;j<Math.sqrt(gridSize);j++){
+        for (int i = 0; i < Math.sqrt(gridSize); i++) {
+            for (int j = 0; j < Math.sqrt(gridSize); j++) {
                 if (diff.equals("Medium")) {
                     possibleBoxes.add("gridMED" + i + j);
                 } else if (diff.equals(("Hard"))) {
@@ -251,9 +247,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // initialize the array for storing the pattern
         ArrayList<String> patternList;
         patternList = new ArrayList<>();
-        for(int i = 0;i<patternLength;i++){
+        for (int i = 0; i < patternLength; i++) {
             // pick random option from possibleBoxes and remove from the list
-            int choiceIndex = (int)(possibleBoxes.size() * Math.random());
+            int choiceIndex = (int) (possibleBoxes.size() * Math.random());
             patternList.add(possibleBoxes.get(choiceIndex));
             possibleBoxes.remove(choiceIndex);
         }
@@ -265,7 +261,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    public void buttonLock(Boolean lockState, boolean lockStartSub) {
+
+    public void buttonLock(Boolean lockState, boolean lockSub, Boolean lockStart) {
         // collect all buttons
 
         ViewGroup screenContainer = findViewById(R.id.screenContainer);
@@ -274,15 +271,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             View currentBut = screenContainer.getChildAt(i);
             currentBut.setEnabled(lockState);
 
-        }//only lock the grid buttons
-        if (lockStartSub == false) {
+
+        }//only lock the grid buttons and start button
+        if (lockSub) {
             View submit = findViewById(R.id.submitBut);
-            View start = findViewById(R.id.StartBut);
-            submit.setEnabled(true);
-            start.setEnabled(true);
+            submit.setEnabled(false);
         }
+        if (lockStart) {
+            View start = findViewById(R.id.StartBut);
+            start.setEnabled(false);
+        }
+        // lock the start button so you cannot get a new sequence
 
     }
+
 
     public void addData(int newEntry, String date) {
         boolean insertData = mDatabaseHelper.addData(newEntry, date);
@@ -301,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void changeDiff() {
-        //TODO FIND A BETTER WYA TO DO THIS
+        //TODO change ui to use tables
         //collect all the easy diff boxes
         int[] easyBoxes = {R.id.grid00, R.id.grid01, R.id.grid10, R.id.grid11};
         // collect all the medium diff boxes

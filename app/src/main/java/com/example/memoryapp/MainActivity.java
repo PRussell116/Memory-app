@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int gridSize;
         if (diffValue.equals("Medium")) {
             gridSize = 9;
+        } else if (diffValue.equals("Hard")) {
+            gridSize = 36;
         } else {
             gridSize = 4;
         }
@@ -106,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
+//TODO PREVENT PRESSING THE START BUTTON TWICE
 
 
     // Implement the OnClickListener callback
@@ -133,6 +135,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String currentBoxId;
                 if (diffValue.equals("Medium")) {
                     currentBoxId = "gridMED" + i + j;
+                } else if (diffValue.equals("Hard")) {
+                    currentBoxId = "gridHard" + i + j;
                 } else {
                     currentBoxId = "grid" + i + j;
                 }
@@ -176,9 +180,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 changeDiff();
 
 
-            } else if (patternLength > 7) {
+            } else if (patternLength > 7 && diffValue.equals("Medium")) {
+                // set diff to hard
+                diffValue = "Hard";
+                // turn boxes invisible and hard to visible
+                changeDiff();
+            } else if (patternLength > 20) {
                 Random r = new Random();
-                patternLength = r.nextInt(8); //change so its only long pattern
+                patternLength = r.nextInt(30); //change so its only long pattern
             }
 
             // when max pattern len on hardest diff is reached prevent going too high, choose random long pattern
@@ -232,6 +241,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             for(int j = 0;j<Math.sqrt(gridSize);j++){
                 if (diff.equals("Medium")) {
                     possibleBoxes.add("gridMED" + i + j);
+                } else if (diff.equals(("Hard"))) {
+                    possibleBoxes.add("gridHard" + i + j);
                 } else {
                     possibleBoxes.add("grid" + i + j);
                 }
@@ -290,11 +301,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void changeDiff() {
-
+        //TODO FIND A BETTER WYA TO DO THIS
         //collect all the easy diff boxes
         int[] easyBoxes = {R.id.grid00, R.id.grid01, R.id.grid10, R.id.grid11};
         // collect all the medium diff boxes
         int[] medBoxes = {R.id.gridMED00, R.id.gridMED01, R.id.gridMED02, R.id.gridMED10, R.id.gridMED11, R.id.gridMED12, R.id.gridMED20, R.id.gridMED21, R.id.gridMED22};
+
+
+        ViewGroup hardBoxContainter = findViewById(R.id.hardBoxContainer);
+        hardBoxContainter.setVisibility(View.GONE);
 
 
         //turn boxes invisible
@@ -313,6 +328,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (diffValue.equals("Medium")) {
             gridSize = 9;
             winStreak = 3; // start at 3 when you choose medium
+            patternLength = 3;
 
             //set medium boxes to visible
             for (int medBox : medBoxes) {
@@ -320,6 +336,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 currentButton.setVisibility(View.VISIBLE);
             }
 
+        } else if (diffValue.equals("Hard")) {
+            gridSize = 36;
+            winStreak = 7; // start at 3 when you choose medium
+            patternLength = 7;
+
+            hardBoxContainter.setVisibility(View.VISIBLE);
         } else {
             // default easy
             gridSize = 4;

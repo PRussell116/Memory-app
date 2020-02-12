@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/gridMED12"
         app:layout_constraintTop_toBottomOf="@+id/gridMED21"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <Button
         android:id="@+id/gridMED12"
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toStartOf="@+id/gridMED22"
         app:layout_constraintStart_toEndOf="@+id/gridMED02"
         app:layout_constraintTop_toBottomOf="@+id/gridMED11"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <Button
         android:id="@+id/gridMED02"
@@ -47,7 +47,7 @@
         app:layout_constraintEnd_toStartOf="@+id/gridMED12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gridMED01"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <Button
         android:id="@+id/gridMED01"
@@ -61,7 +61,7 @@
         app:layout_constraintEnd_toStartOf="@+id/gridMED11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gridMED00"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <Button
         android:id="@+id/gridMED21"
@@ -75,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/gridMED11"
         app:layout_constraintTop_toBottomOf="@+id/gridMED20"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <Button
         android:id="@+id/gridMED11"
@@ -90,7 +90,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/gridMED01"
         app:layout_constraintTop_toBottomOf="@+id/gridMED10"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <Button
         android:id="@+id/gridMED10"
@@ -104,7 +104,7 @@
         app:layout_constraintEnd_toStartOf="@+id/gridMED20"
         app:layout_constraintStart_toEndOf="@+id/gridMED00"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <Button
         android:id="@+id/gridMED20"
@@ -118,7 +118,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/gridMED10"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <Button
         android:id="@+id/gridMED00"
@@ -132,7 +132,7 @@
         app:layout_constraintEnd_toStartOf="@+id/gridMED10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <Button
         android:id="@+id/grid11"
@@ -240,5 +240,389 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TableLayout
+        android:id="@+id/hardBoxContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:horizontalSpacing="3dp"
+        android:verticalSpacing="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/submitBut"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:id="@+id/hardBoxRow1"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/gridHard00"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard10"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard20"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard30"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard40"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard50"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/hardBoxRow2"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/gridHard01"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard11"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard21"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard31"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard41"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard51"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/hardBoxRow3"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/gridHard02"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard12"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard22"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard32"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard42"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard52"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/hardBoxRow4"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/gridHard03"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard13"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard23"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard33"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard43"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard53"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/hardBoxRow5"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="1dp">
+
+            <Button
+                android:id="@+id/gridHard04"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard14"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard24"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard34"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard44"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard54"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/hardBoxRow6"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/gridHard05"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard15"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard25"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard35"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard45"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+
+            <Button
+                android:id="@+id/gridHard55"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:background="#A9A9A9"
+                android:onClick="onClick" />
+        </TableRow>
+    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

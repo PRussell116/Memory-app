@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 //TODO make the ui pretty
-//  TODO REMOVE THE OVERWRITES IN UI XML AND FIND OTU HOW TO USE @STRING
+
 
 public class scoreScreen extends AppCompatActivity {
     DatabaseHelper mDatabaseHelper;

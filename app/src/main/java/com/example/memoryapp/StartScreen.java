@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 //todo make screens for each size
+//todo adjust ui so it fits better
 public class StartScreen extends AppCompatActivity {
 
     @Override

@@ -24,7 +24,7 @@ import java.util.Random;
 
 import static java.lang.String.format;
 
-
+//todo make a graph
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -303,44 +303,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void changeDiff() {
-        //TODO change ui to use tables
-        //collect all the easy diff boxes
-        int[] easyBoxes = {R.id.grid00, R.id.grid01, R.id.grid10, R.id.grid11};
-        // collect all the medium diff boxes
-        int[] medBoxes = {R.id.gridMED00, R.id.gridMED01, R.id.gridMED02, R.id.gridMED10, R.id.gridMED11, R.id.gridMED12, R.id.gridMED20, R.id.gridMED21, R.id.gridMED22};
 
+        //turn boxes invisible
+        ViewGroup easyBoxContainer = findViewById(R.id.easyBoxContainer);
+        easyBoxContainer.setVisibility(View.GONE);
+
+        ViewGroup medBoxContainer = findViewById(R.id.medBoxContainer);
+        medBoxContainer.setVisibility(View.GONE);
 
         ViewGroup hardBoxContainter = findViewById(R.id.hardBoxContainer);
         hardBoxContainter.setVisibility(View.GONE);
 
-
-        //turn boxes invisible
-        for (int easyBox : easyBoxes) {
-            Button currentButton = findViewById(easyBox);
-            currentButton.setVisibility(View.GONE);
-        }
-        for (int medBox : medBoxes) {
-            Button currentButton = findViewById(medBox);
-            currentButton.setVisibility(View.GONE);
-        }
-
         // default is easy
-
-
         if (diffValue.equals("Medium")) {
             gridSize = 9;
             winStreak = 3; // start at 3 when you choose medium
             patternLength = 3;
 
             //set medium boxes to visible
-            for (int medBox : medBoxes) {
-                Button currentButton = findViewById(medBox);
-                currentButton.setVisibility(View.VISIBLE);
-            }
+            medBoxContainer.setVisibility(View.VISIBLE);
 
         } else if (diffValue.equals("Hard")) {
             gridSize = 36;
-            winStreak = 7; // start at 3 when you choose medium
+            winStreak = 7; // start at 7 when you choose hard
             patternLength = 7;
 
             hardBoxContainter.setVisibility(View.VISIBLE);
@@ -348,18 +333,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // default easy
             gridSize = 4;
             //set easy boxes to visible
-            for (int easyBox : easyBoxes) {
-                Button currentButton = findViewById(easyBox);
-                currentButton.setVisibility(View.VISIBLE);
-                Log.i("grid", "grid:" + gridSize);
-
-
-            }
+            easyBoxContainer.setVisibility(View.VISIBLE);
         }
-
     }
-
-
 }
 
 

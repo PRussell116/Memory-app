@@ -11,9 +11,8 @@
     <application
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light">
-        <activity android:name=".scoreScreen">
-
-        </activity>
+        <activity android:name=".howToPlay" />
+        <activity android:name=".scoreScreen" />
         <activity android:name=".StartScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

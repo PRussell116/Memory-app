@@ -59,6 +59,11 @@ public class StartScreen extends AppCompatActivity {
         Intent intent = new Intent(StartScreen.this, scoreScreen.class);
         startActivity(intent);
     }
+
+    public void howToPlay(View view) {
+        Intent intent = new Intent(StartScreen.this, howToPlay.class);
+        startActivity(intent);
+    }
     // TODO ADD HOW TO PLAY PAGE
 
 }

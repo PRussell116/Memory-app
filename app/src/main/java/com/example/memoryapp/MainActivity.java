@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -263,25 +264,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void buttonLock(Boolean lockState, boolean lockSub, Boolean lockStart) {
-        // collect all buttons
-
-        ViewGroup screenContainer = findViewById(R.id.screenContainer);
-        // loop children of container
-        for (int i = 0; i < screenContainer.getChildCount(); i++) {
-            View currentBut = screenContainer.getChildAt(i);
-            currentBut.setEnabled(lockState);
 
 
-        }//only lock the grid buttons and start button
-        if (lockSub) {
-            View submit = findViewById(R.id.submitBut);
-            submit.setEnabled(false);
+        TableLayout gridContainer; // contains the table
+
+        if (diffValue.equals("Hard")) {
+            gridContainer = findViewById(R.id.hardBoxContainer);
+        } else if (diffValue.equals("Medium")) {
+            gridContainer = findViewById(R.id.medBoxContainer);
+        } else {
+            gridContainer = findViewById(R.id.easyBoxContainer);
         }
-        if (lockStart) {
-            View start = findViewById(R.id.StartBut);
-            start.setEnabled(false);
+        // loop through rows
+        for (int i = 0; i < gridContainer.getChildCount(); i++) {
+            ViewGroup gridRow = (ViewGroup) gridContainer.getChildAt(i);
+            //loop through the buttons in the rows
+            for (int j = 0; j < gridRow.getChildCount(); j++) {
+                //lock the current button
+                View currentBut = gridRow.getChildAt(j);
+                currentBut.setEnabled(lockState);
+
+
+            }
         }
+        // lock / unlock the submit and start buttons
+        View submit = findViewById(R.id.submitBut);
+        submit.setEnabled(!lockSub);
         // lock the start button so you cannot get a new sequence
+        View start = findViewById(R.id.StartBut);
+        start.setEnabled(!lockStart);
+
+
+
+
 
     }
 

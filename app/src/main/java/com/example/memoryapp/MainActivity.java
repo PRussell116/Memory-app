@@ -26,6 +26,7 @@ import java.util.Random;
 import static java.lang.String.format;
 
 //todo make a graph
+//TODO CHANGE PRIVACY ON BUNCH OF METHODS
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -158,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // sort the lists
         Collections.sort(pattern);
-        Collections.sort(gridBoxes);
+        //   Collections.sort(gridBoxes);
 
 
         // check if submitted equals the pattern
@@ -257,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return patternList;
     }
 
-    public void goToMainMenu() {
+    private void goToMainMenu() {
         Intent intent = new Intent(MainActivity.this, StartScreen.class);
         startActivity(intent);
     }
@@ -294,13 +295,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View start = findViewById(R.id.StartBut);
         start.setEnabled(!lockStart);
 
-
-
-
+        if (!lockStart) {
+            start.setBackgroundColor(Color.GREEN);
+        } else start.setBackgroundColor(Color.WHITE); //set it to green when able to be touched
 
     }
 
-
+    // new enrty = score
     public void addData(int newEntry, String date) {
         boolean insertData = mDatabaseHelper.addData(newEntry, date);
         if (insertData) {
@@ -317,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void changeDiff() {
+    private void changeDiff() {
 
         //turn boxes invisible
         ViewGroup easyBoxContainer = findViewById(R.id.easyBoxContainer);

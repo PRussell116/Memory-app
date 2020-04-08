@@ -49,7 +49,13 @@ public class scoreScreen extends AppCompatActivity {
         }
 
         // get most recent
-        Integer latestScore = scoreData.get(scoreData.size() - 1);
+        Integer latestScore;
+        try {
+            latestScore = scoreData.get(scoreData.size() - 1);
+        } catch (Exception e) {
+            latestScore = 0;
+        }
+
         //insert into box
         TextView prevScoreBox = findViewById(R.id.previousScore);
         prevScoreBox.setText(String.valueOf(latestScore));

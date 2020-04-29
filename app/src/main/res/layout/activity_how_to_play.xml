@@ -6,8 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".howToPlay">
 
+    <ImageButton
+        android:id="@+id/helpButLeft"
+        android:layout_width="87dp"
+        android:layout_height="62dp"
+        android:onClick="leftClick"
+        android:rotation="90"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.379"
+        app:srcCompat="@android:drawable/arrow_down_float" />
+
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/helpImg"
         android:layout_width="270dp"
         android:layout_height="369dp"
         android:layout_marginTop="84dp"
@@ -28,20 +42,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/helpImg" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="115dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="155dp"
-        android:layout_marginEnd="141dp"
-        android:layout_marginBottom="53dp"
-        android:text="TEMP IMG"
-        app:layout_constraintBottom_toTopOf="@+id/menuBut"
+    <ImageButton
+        android:id="@+id/helpButRight"
+        android:layout_width="87dp"
+        android:layout_height="62dp"
+        android:onClick="rightClick"
+        android:rotation="-90"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.379"
+        app:srcCompat="@android:drawable/arrow_down_float" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
